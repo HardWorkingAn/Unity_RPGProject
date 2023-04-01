@@ -4,24 +4,33 @@ using UnityEngine;
 
 public class CameraContoller : MonoBehaviour
 {
-    public GameObject Target;               // Ä«¸Ş¶ó°¡ µû¶ó´Ù´Ò Å¸°Ù
+    public GameObject Target;               // ì¹´ë©”ë¼ê°€ ë”°ë¼ë‹¤ë‹ íƒ€ê²Ÿ
 
-    public float offsetX = 0.0f;            // Ä«¸Ş¶óÀÇ xÁÂÇ¥
-    public float offsetY = 5.0f;           // Ä«¸Ş¶óÀÇ yÁÂÇ¥
-    public float offsetZ = -5.0f;          // Ä«¸Ş¶óÀÇ zÁÂÇ¥
+    public float offsetX = 0.0f;            // ì¹´ë©”ë¼ì˜ xì¢Œí‘œ
+    public float offsetY = 7.0f;           // ì¹´ë©”ë¼ì˜ yì¢Œí‘œ
+    public float offsetZ = -7.0f;          // ì¹´ë©”ë¼ì˜ zì¢Œí‘œ
 
-    public float CameraSpeed = 10.0f;       // Ä«¸Ş¶óÀÇ ¼Óµµ
-    Vector3 TargetPos;                      // Å¸°ÙÀÇ À§Ä¡
+    public float CameraSpeed = 1.0f;       // ì¹´ë©”ë¼ì˜ ì†ë„
+    Vector3 TargetPos;                      // íƒ€ê²Ÿì˜ ìœ„ì¹˜
 
     // Start is called before the first frame update
     void Start()
     {
         Target = GameObject.Find("Character");
         transform.Rotate(45.0f, 0.0f, 0.0f);
-    }
 
+        offsetX = 0.0f;
+        offsetY = 7.0f;
+        offsetZ = -7.0f;
+    }
+    w
     // Update is called once per frame
     void Update()
+    {
+        
+        
+    }
+    void FixedUpdate()
     {
         TargetPos = new Vector3(
              Target.transform.position.x + offsetX,
@@ -29,13 +38,10 @@ public class CameraContoller : MonoBehaviour
              Target.transform.position.z + offsetZ
              );
 
-        // Ä«¸Ş¶óÀÇ ¿òÁ÷ÀÓÀ» ºÎµå·´°Ô ÇÏ´Â ÇÔ¼ö(Lerp)
-        transform.position = Vector3.Lerp(transform.position, TargetPos, Time.deltaTime * CameraSpeed);
-        
-    }
-    private void LateUpdate()
-    {
-        
+        // ì¹´ë©”ë¼ì˜ ì›€ì§ì„ì„ ë¶€ë“œëŸ½ê²Œ í•˜ëŠ” í•¨ìˆ˜(Lerp)
+        //transform.position = Vector3.Lerp(transform.position, TargetPos, Time.deltaTime * CameraSpeed);
+        transform.position = TargetPos;
+
     }
 
 }

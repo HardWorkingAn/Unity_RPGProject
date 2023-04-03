@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 10.0f;
+    public float speed = 10.0f; // 스피드 최대 속도
     private Rigidbody characterRigidbody;
-    float speedLog;
+    float speedLog; // 현지 스피드 로그 확인을 하기위한 값
     //public Vector3 position;
     //public float Speed = 10;
     Vector3 velocity;
@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour
         {
             Timecheck = 0.0f;
             Debug.Log("Current Speed: " + speedLog);
+            Debug.Log($"X speed : {X}, Y speed : {Z}");
         }
 
         /*
@@ -103,14 +104,19 @@ public class PlayerController : MonoBehaviour
         transform.position = position;
         */
     }
+
+    float X;
+    float Z;
     void FixedUpdate()
     {
-        float X = Input.GetAxisRaw("Horizontal");
-        float Z = Input.GetAxisRaw("Vertical");
+        X = Input.GetAxisRaw("Horizontal"); // 좌우 이동 ad, 화살표 왼쪽 오른쪽  둘다 가능
+        Z = Input.GetAxisRaw("Vertical"); // 
 
         float fall = characterRigidbody.velocity.y;
-        
-        characterRigidbody.velocity = new Vector3(X * speed, fall, Z * speed);
+        if( (X != 0 && Z != 0))
+            characterRigidbody.velocity = new Vector3(X * speed * 0.7f, fall, Z * speed * 0.7f); // 대각선으로 이동하면 속도가 너무 빠르기 떄문에 감속
+        else
+            characterRigidbody.velocity = new Vector3(X * speed, fall, Z * speed); // 기본 이동
 
 
         Vector3 Rotation = new Vector3(X, 0, Z);

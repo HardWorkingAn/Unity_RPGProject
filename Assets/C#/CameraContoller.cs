@@ -23,11 +23,11 @@ public class CameraContoller : MonoBehaviour
         offsetY = 7.0f;
         offsetZ = -7.0f;
     }
-    w
+    
     // Update is called once per frame
     void Update()
     {
-        
+
         
     }
     void FixedUpdate()
